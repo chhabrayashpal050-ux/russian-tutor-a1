@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>Russian A1 Tutor</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+:root{--bg:#faf7f2;--fg:#1d1b19;--card:#fff;--mut:#6f6a62;--ac:#b83227;--ok:#2e8b57;--bad:#c0392b;--bd:#e4ddd2;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#171513;--fg:#f1ece4;--card:#242120;--mut:#a39c91;--ac:#e5675b;--ok:#4cc38a;--bad:#ef7a6d;--bd:#3a3633}}
+:root[data-theme="dark"]{--bg:#171513;--fg:#f1ece4;--card:#242120;--mut:#a39c91;--ac:#e5675b;--ok:#4cc38a;--bad:#ef7a6d;--bd:#3a3633}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:var(--bg);color:var(--fg);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+#wrap{max-width:600px;margin:0 auto;padding:16px}
+h1{font-size:20px;margin:4px 0 12px}h2{font-size:18px;margin:0 0 8px}h3{font-size:14px;margin:14px 0 4px;color:var(--mut);text-transform:uppercase;letter-spacing:.04em}
+nav{display:flex;gap:6px;margin-bottom:14px}nav button{flex:1;padding:9px 4px;font-size:14px}
+button{font:inherit;color:var(--fg);background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:10px 12px;cursor:pointer}
+button:hover{border-color:var(--ac)}button.on,button.pri{background:var(--ac);color:#fff;border-color:var(--ac)}button:disabled{opacity:.6;cursor:default}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:16px;margin-bottom:12px}
+.mut{color:var(--mut);font-size:14px}.c{text-align:center}
+.row{display:flex;gap:8px;margin-top:12px}.row>*{flex:1}
+.bar{height:8px;background:var(--bd);border-radius:6px;overflow:hidden;margin:6px 0 12px}.bar i{display:block;height:100%;background:var(--ok)}
+.scroll{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:15px}
+td,th{border-bottom:1px solid var(--bd);padding:6px 8px;text-align:left;vertical-align:top}th{color:var(--mut);font-size:13px}
+.ru{font-weight:600;font-size:18px}.ph{color:var(--ac)}
+.opt{display:block;width:100%;margin-top:8px;text-align:left;font-size:17px}
+.opt.ok{background:var(--ok);color:#fff;border-color:var(--ok)}.opt.no{background:var(--bad);color:#fff;border-color:var(--bad)}
+input[type=text]{width:100%;font:inherit;font-size:20px;padding:12px;border-radius:10px;border:1px solid var(--bd);background:var(--bg);color:var(--fg);margin-top:8px}
+.item{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 0;border-bottom:1px solid var(--bd);cursor:pointer}.item.lock{opacity:.45;cursor:default}
+.fb{margin-top:12px;min-height:24px}.q{font-size:19px;font-weight:600}
+code{background:var(--bd);padding:1px 6px;border-radius:6px}
+</style></head><body><div id="wrap"><h1>🇷🇺 Russian A1 Tutor</h1><nav id="nav"></nav><div id="app"></div></div>
+<script>
+const LS=[
+{m:"Module 1 · Cyrillic & Phonetics",t:"The 10 vowels (hard/soft pairs)",h:`<p>Russian has 5 vowel sounds, each written with 2 letters. The soft letter adds a <b>y-glide</b> or softens the consonant before it.</p>
+<table><tr><th>Hard</th><th>Soft</th><th>Sounds</th></tr><tr><td>а</td><td>я</td><td>[ah] / [yah]</td></tr><tr><td>э</td><td>е</td><td>[eh] / [yeh]</td></tr><tr><td>ы</td><td>и</td><td>[ih] / [ee]</td></tr><tr><td>о</td><td>ё</td><td>[oh] / [yoh]</td></tr><tr><td>у</td><td>ю</td><td>[oo] / [yoo]</td></tr></table>
+<table><tr><td class="ru">ма́ма</td><td class="ph">[MA-ma]</td><td>mom</td></tr><tr><td class="ru">мя́ч</td><td class="ph">[myach]</td><td>ball</td></tr><tr><td class="ru">сыр</td><td class="ph">[sir]</td><td>cheese</td></tr><tr><td class="ru">ёлка</td><td class="ph">[YOL-ka]</td><td>fir tree</td></tr></table>
+<p><b>Rule:</b> only <b>е</b> and <b>ё</b> start with a real <i>y</i> sound at the beginning of a word. After a consonant, the soft vowel just softens it.</p>`,
+q:[{q:"What is the soft partner of у?",o:["ю","я","ё","и"],a:0},{q:"а : я = ы : ___",o:["и","е","э","ю"],a:0},{q:"Read and translate: сыр [sir]",o:["cheese","soup","sugar","sister"],a:0}]},
+{m:"Module 1 · Cyrillic & Phonetics",t:"Vowel reduction",h:`<p>Only the <b>stressed</b> vowel is pronounced fully. Unstressed vowels weaken.</p>
+<table><tr><th>Written</th><th>Unstressed sounds like</th></tr><tr><td>о</td><td>[a] (before the stress: a short "ah")</td></tr><tr><td>я, е</td><td>[ee]</td></tr></table>
+<table><tr><td class="ru">вода́</td><td class="ph">[va-DA]</td><td>water</td></tr><tr><td class="ru">молоко́</td><td class="ph">[ma-la-KO]</td><td>milk</td></tr><tr><td class="ru">язы́к</td><td class="ph">[ee-ZIK]</td><td>tongue/language</td></tr></table>
+<p>Tip: learn the stress mark with every new word.</p>`,
+q:[{q:"How is the first о in молоко́ pronounced?",o:["[a]","[oh]","[oo]","[eh]"],a:0},{q:"Which syllable is stressed in вода́?",o:["second (да)","first (во)"],a:0},{q:"The я in язы́к (unstressed) sounds like…",o:["[ee]","[yah]","[oh]","[oo]"],a:0}]},
+{m:"Module 1 · Cyrillic & Phonetics",t:"Devoicing & assimilation",h:`<p><b>1. Final voiced consonants go voiceless:</b> б→п, в→ф, г→к, д→т, ж→ш, з→с.</p>
+<p><b>2. Voiced before voiceless → voiceless</b> (and the reverse).</p>
+<table><tr><td class="ru">хлеб</td><td class="ph">[khlyep]</td><td>bread (б→п)</td></tr><tr><td class="ru">друг</td><td class="ph">[drook]</td><td>friend (г→к)</td></tr><tr><td class="ru">во́дка</td><td class="ph">[VOT-ka]</td><td>vodka (д→т)</td></tr><tr><td class="ru">в па́рке</td><td class="ph">[f PAR-kye]</td><td>in the park (в→ф)</td></tr></table>`,
+q:[{q:"Final б in хлеб sounds like…",o:["[p]","[b]","[v]","[f]"],a:0},{q:"The д in во́дка sounds like…",o:["[t]","[d]","[z]","[s]"],a:0},{q:"друг ends with which sound?",o:["[k]","[g]","[kh]","[d]"],a:0}]},
+{m:"Module 2 · Sentence Core",t:"No \"to be\" & pronouns",h:`<p>In the present tense Russian <b>drops</b> "am / is / are".</p>
+<table><tr><td class="ru">Я студе́нт.</td><td class="ph">[ya stoo-DYENT]</td><td>I am a student.</td></tr><tr><td class="ru">Она́ врач.</td><td class="ph">[a-NA vrach]</td><td>She is a doctor.</td></tr></table>
+<table><tr><th>Pronoun</th><th>Sound</th><th>Meaning</th></tr><tr><td class="ru">я</td><td class="ph">[ya]</td><td>I</td></tr><tr><td class="ru">ты</td><td class="ph">[ti]</td><td>you (informal)</td></tr><tr><td class="ru">он / она́ / оно́</td><td class="ph">[on / a-NA / a-NO]</td><td>he / she / it</td></tr><tr><td class="ru">мы</td><td class="ph">[mi]</td><td>we</td></tr><tr><td class="ru">вы</td><td class="ph">[vi]</td><td>you (formal or plural)</td></tr><tr><td class="ru">они́</td><td class="ph">[a-NEE]</td><td>they</td></tr></table>`,
+q:[{q:"\"I am a student\" (male) =",o:["Я студент.","Я есть студент.","Я быть студент.","Студент я есть."],a:0},{q:"\"They\" =",o:["они́","он","мы","вы"],a:0},{q:"Which pronoun is used for one person you address politely?",o:["вы","ты","мы","они́"],a:0}]},
+{m:"Module 2 · Sentence Core",t:"Gender: M / F / N",h:`<p>Gender comes from the <b>ending</b> of the noun in its dictionary form.</p>
+<table><tr><th>Gender</th><th>Ending</th><th>Examples</th></tr><tr><td>Masculine</td><td>consonant, -й</td><td class="ru">журна́л [zhoor-NAL], музе́й [moo-ZYAY]</td></tr><tr><td>Feminine</td><td>-а, -я</td><td class="ru">кни́га [KNEE-ga], неде́ля [nee-DYE-lya]</td></tr><tr><td>Neuter</td><td>-о, -е</td><td class="ru">окно́ [ak-NO], мо́ре [MO-rye]</td></tr></table>
+<p>Possessives agree: <b>мой</b> дом (m), <b>моя́</b> кни́га (f), <b>моё</b> окно́ (n).</p>`,
+q:[{q:"Gender of журна́л?",o:["Masculine","Feminine","Neuter"],a:0},{q:"Gender of кни́га?",o:["Feminine","Masculine","Neuter"],a:0},{q:"Gender of окно́?",o:["Neuter","Masculine","Feminine"],a:0}]},
+{m:"Module 3 · Essential Grammar",t:"Present tense (чита́ть)",h:`<p>Most verbs drop <b>-ть</b> and add endings. Pattern for <b>чита́ть</b> [chee-TAT'] "to read":</p>
+<table><tr><td>я</td><td class="ru">чита́ю</td><td>мы</td><td class="ru">чита́ем</td></tr><tr><td>ты</td><td class="ru">чита́ешь</td><td>вы</td><td class="ru">чита́ете</td></tr><tr><td>он/она́</td><td class="ru">чита́ет</td><td>они́</td><td class="ru">чита́ют</td></tr></table>
+<p>Same pattern: <b>знать</b> (know), <b>люби́ть</b> uses <i>люблю́, лю́бишь…</i> (a different pattern; you'll meet it later).</p>`,
+q:[{q:"Я ___ (чита́ть)",a:["читаю"]},{q:"Ты ___ (чита́ть)",a:["читаешь"]},{q:"Они́ ___ (чита́ть)",a:["читают"]}]},
+{m:"Module 3 · Essential Grammar",t:"Accusative (direct object)",h:`<p>The accusative marks <b>what you read/see/know</b>.</p>
+<table><tr><th>Type</th><th>Change</th><th>Example</th></tr><tr><td>Masc. (thing)</td><td>no change</td><td class="ru">Я чита́ю журна́л.</td></tr><tr><td>Fem. -а</td><td>-а → <b>-у</b></td><td class="ru">Я чита́ю кни́гу.</td></tr><tr><td>Fem. -я</td><td>-я → <b>-ю</b></td><td class="ru">Я зна́ю Ма́рию. (Мария → Марию)</td></tr><tr><td>Neuter</td><td>no change</td><td class="ru">Я чита́ю письмо́.</td></tr></table>
+<p>зна́ю [ZNA-yoo] = I know.</p>`,
+q:[{q:"Я чита́ю ___ (кни́га)",a:["книгу"]},{q:"Я зна́ю ___ (А́нна)",a:["Анну"]},{q:"Я чита́ю ___ (журна́л)",a:["журнал"]}]},
+{m:"Module 3 · Essential Grammar",t:"Prepositional (location)",h:`<p>After <b>в</b> (in) and <b>на</b> (on/at), nouns usually take <b>-е</b>.</p>
+<table><tr><th>Nominative</th><th>Prepositional</th></tr><tr><td class="ru">дом</td><td class="ru">в до́ме [v DO-mye] in the house</td></tr><tr><td class="ru">Москва́</td><td class="ru">в Москве́ [v mask-VYE] in Moscow</td></tr><tr><td class="ru">шко́ла</td><td class="ru">в шко́ле [f SHKO-lye] at school</td></tr></table>
+<p>Use <b>на</b> for open places and events: на у́лице, на рабо́те.</p>`,
+q:[{q:"Я в ___ (Москва́)",a:["Москве"]},{q:"Кни́га в ___ (дом)",a:["доме"]},{q:"Она́ в ___ (шко́ла)",a:["школе"]}]}];
+
+const V={Greetings:[["Приве́т","pri-VYET","hi"],["Здра́вствуйте","ZDRAST-vooy-tye","hello (formal)"],["Пока́","pa-KA","bye (informal)"],["До свида́ния","da svee-DA-nee-ya","goodbye"],["Спаси́бо","spa-SEE-ba","thank you"],["Пожа́луйста","pa-ZHAL-oo-sta","please / you're welcome"],["Извини́те","eez-vee-NEE-tye","excuse me / sorry"],["Да","da","yes"],["Нет","nyet","no"],["Хорошо́","kha-ra-SHO","good / OK"]],
+Numbers:[["оди́н","a-DEEN","one"],["два","dva","two"],["три","tree","three"],["четы́ре","chee-TI-rye","four"],["пять","pyat'","five"],["шесть","shest'","six"],["семь","syem'","seven"],["во́семь","VO-seem'","eight"],["де́вять","DYE-vyat'","nine"],["де́сять","DYE-syat'","ten"]],
+Food:[["хлеб","khlyep","bread"],["вода́","va-DA","water"],["молоко́","ma-la-KO","milk"],["чай","chay","tea"],["ко́фе","KO-fye","coffee"],["сыр","sir","cheese"],["мя́со","MYA-sa","meat"],["ры́ба","RI-ba","fish"],["я́блоко","YA-bla-ka","apple"],["суп","soop","soup"]],
+Directions:[["напра́во","na-PRA-va","to the right"],["нале́во","na-LYE-va","to the left"],["пря́мо","PRYA-ma","straight"],["здесь","zdyes'","here"],["там","tam","there"],["где","gdye","where"],["ря́дом","RYA-dam","nearby"],["далеко́","da-lee-KO","far"],["бли́зко","BLEES-ka","close"],["у́лица","OO-lee-tsa","street"]],
+Family:[["ма́ма","MA-ma","mom"],["па́па","PA-pa","dad"],["брат","brat","brother"],["сестра́","see-STRA","sister"],["сын","sin","son"],["дочь","doch","daughter"],["ба́бушка","BA-boosh-ka","grandmother"],["де́душка","DYE-doosh-ka","grandfather"],["семья́","see-MYA","family"],["друг","drook","friend"]]};
+
+let P={done:{},li:0,vb:{}};
+try{const x=JSON.parse(localStorage.getItem("ru-a1-v1")||"null");if(x&&typeof x==="object")P=Object.assign(P,x)}catch(e){}
+const save=()=>{try{localStorage.setItem("ru-a1-v1",JSON.stringify(P))}catch(e){}};
+const $=s=>document.querySelector(s);
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const norm=s=>String(s).normalize("NFD").replace(/\u0301/g,"").normalize("NFC").toLowerCase().replace(/ё/g,"е").replace(/[^а-яa-z0-9 ]/g,"").trim().replace(/\s+/g," ");
+const plain=s=>s.normalize("NFD").replace(/\u0301/g,"").normalize("NFC");
+window.sp=t=>{try{if(!window.speechSynthesis)return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(plain(t));u.lang="ru-RU";u.rate=.8;speechSynthesis.speak(u)}catch(e){}};
+const firstUndone=()=>{for(let i=0;i<LS.length;i++)if(P.done[i]===undefined)return i;return -1};
+const unlocked=i=>i===0||P.done[i-1]!==undefined;
+let T="home",Q=null,VC="Greetings",showEn=true,msg="",resetArm=false;
+
+function nav(){$("#nav").innerHTML=[["home","Lessons"],["next","/next"],["drill","/drill"],["vocab","/vocab"]].map(t=>`<button class="${T===t[0]?"on":""}" onclick="go('${t[0]}')">${t[1]}</button>`).join("")}
+window.go=t=>{msg="";resetArm=false;Q=null;
+ if(t==="next"){const i=firstUndone();if(P.done[P.li]===undefined&&unlocked(P.li)&&T==="lesson"){msg="Finish the 3 questions to unlock the next lesson.";return openL(P.li)}
+  if(i<0){T="vocab";return render()}return openL(i)}
+ if(t==="drill")return startDrill();
+ T=t;render()};
+window.openL=i=>{if(!unlocked(i))return;P.li=i;save();T="lesson";render()};
+function render(){nav();({home:rHome,lesson:rLesson,quiz:rQuiz,vocab:rVocab,vq:rQuiz})[T]()}
+
+function rHome(){
+ const n=Object.keys(P.done).length,tot=LS.length;let last="";
+ $("#app").innerHTML=`<div class="card"><b>${n} / ${tot} lessons done</b><div class="bar"><i style="width:${n/tot*100}%"></i></div><div class="mut">Each micro-lesson ends with 3 questions. Commands: <code>/next</code> next lesson, <code>/drill</code> 5 mixed questions, <code>/vocab</code> word lists.</div></div>`+
+ LS.map((l,i)=>{let h="";if(l.m!==last){h=`<h3>${l.m}</h3>`;last=l.m}
+  return h+`<div class="item ${unlocked(i)?"":"lock"}" onclick="openL(${i})"><span>${i+1}. ${l.t}</span><span>${P.done[i]!==undefined?"✅ "+P.done[i]+"/3":unlocked(i)?"▶":"🔒"}</span></div>`}).join("")+
+ `<h3>Module 4 · Survival Vocabulary</h3><div class="item" onclick="go('vocab')"><span>5 categories × 10 words</span><span>▶</span></div>
+ <div class="row"><button onclick="doReset()">${resetArm?"Tap again to erase progress":"Reset progress"}</button></div>`}
+window.doReset=()=>{if(!resetArm){resetArm=true;return render()}P={done:{},li:0,vb:{}};save();resetArm=false;render()};
+
+function rLesson(){const l=LS[P.li];
+ $("#app").innerHTML=`<div class="card"><div class="mut">${l.m} · Lesson ${P.li+1}/${LS.length}</div><h2>${l.t}</h2>${msg?`<p style="color:var(--ac)"><b>${msg}</b></p>`:""}${l.h}</div>
+ <button class="pri" style="width:100%" onclick="startLesson()">Start 3 questions →</button>`}
+window.startLesson=()=>{Q={list:LS[P.li].q,i:0,ok:0,fn:"lesson",title:LS[P.li].t,ans:false};T="quiz";render()};
+
+function allQs(){let a=[];LS.forEach((l,i)=>{if(unlocked(i))a=a.concat(l.q)});
+ Object.keys(V).forEach(k=>V[k].forEach(w=>a.push(vq(k,w))));return a}
+function vq(k,w){const d=shuffle(V[k].filter(x=>x[2]!==w[2])).slice(0,3).map(x=>x[2]);return{q:`Translate: ${w[0]}  [${w[1]}]`,o:[w[2]].concat(d),a:0}}
+function startDrill(){const lq=[];LS.forEach((l,i)=>{if(unlocked(i))l.q.forEach(x=>lq.push(x))});
+ const vv=[];Object.keys(V).forEach(k=>V[k].forEach(w=>vv.push(vq(k,w))));
+ const pool=shuffle(lq).slice(0,3).concat(shuffle(vv).slice(0,5));
+ Q={list:shuffle(pool).slice(0,5),i:0,ok:0,fn:"drill",title:"Mixed drill",ans:false};T="quiz";render()}
+window.startVQ=()=>{const w=shuffle(V[VC]).slice(0,5);Q={list:w.map(x=>vq(VC,x)),i:0,ok:0,fn:"vocab",title:VC+" quiz",ans:false};T="vq";render()};
+
+function rQuiz(){
+ if(Q.i>=Q.list.length){const s=Q.ok,n=Q.list.length;
+  if(Q.fn==="lesson"){P.done[P.li]=Math.max(P.done[P.li]||0,s)}if(Q.fn==="vocab")P.vb[VC]=Math.max(P.vb[VC]||0,s);save();
+  const more=Q.fn==="lesson"&&firstUndone()>=0;
+  $("#app").innerHTML=`<div class="card c"><h2>${Q.title}: ${s} / ${n}</h2><p>${s===n?"Perfect! 🎉":s>=n/2?"Good — review the misses and retry.":"Reread the lesson and try again."}</p></div>
+  <div class="row"><button onclick="${Q.fn==="lesson"?"openL(P.li)":Q.fn==="drill"?"startDrill()":"startVQ()"}">Retry</button><button class="pri" onclick="go('${Q.fn==="vocab"?"vocab":"next"}')">${Q.fn==="vocab"?"Back to /vocab":more?"/next →":"Continue →"}</button></div>`;return}
+ const q=Q.list[Q.i];if(!q.sh)q.sh=q.o?shuffle(q.o):null;
+ $("#app").innerHTML=`<div class="mut c">${Q.title} · ${Q.i+1} / ${Q.list.length}</div><div class="card"><div class="q">${q.q}</div>
+ ${q.o?q.sh.map((o,i)=>`<button class="opt" data-i="${i}" onclick="ans(${i})">${i+1}. ${o}</button>`).join(""):`<input type="text" id="inp" autocomplete="off" autocapitalize="off" placeholder="Type in Russian"><div class="row"><button class="pri" onclick="ansT()">Check</button></div>`}
+ <div class="fb" id="fb"></div></div>`;Q.ans=false;const i=$("#inp");if(i)i.focus()}
+function done(ok,right){Q.ans=true;if(ok)Q.ok++;
+ $("#fb").innerHTML=`<b style="color:var(${ok?"--ok":"--bad"})">${ok?"Correct!":"Not quite."}</b> ${ok?"":"Answer: <b>"+right+"</b>"}<div class="row"><button class="pri" id="next" onclick="Q.i++;render()">Next →</button></div>`}
+window.ans=i=>{if(Q.ans)return;const q=Q.list[Q.i],ok=q.sh[i]===q.o[q.a];
+ document.querySelectorAll(".opt").forEach((b,j)=>{b.disabled=true;if(q.sh[j]===q.o[q.a])b.classList.add("ok");else if(j===i)b.classList.add("no")});done(ok,q.o[q.a])};
+window.ansT=()=>{if(Q.ans)return;const q=Q.list[Q.i],v=$("#inp").value;if(!norm(v))return;const ok=q.a.some(x=>norm(x)===norm(v));$("#inp").disabled=true;done(ok,q.a[0])};
+
+function rVocab(){
+ const ws=V[VC];
+ $("#app").innerHTML=`<div class="row" style="flex-wrap:wrap;margin:0 0 10px">${Object.keys(V).map(k=>`<button class="${k===VC?"on":""}" style="flex:1 1 30%" onclick="VC='${k}';render()">${k}${P.vb[k]!==undefined?" ✓":""}</button>`).join("")}</div>
+ <div class="card scroll"><table><tr><th>Russian</th><th>Sound</th><th>Meaning</th><th></th></tr>${ws.map(w=>`<tr><td class="ru">${w[0]}</td><td class="ph">[${w[1]}]</td><td>${showEn?w[2]:"•••"}</td><td><button style="padding:2px 8px" onclick="sp('${w[0]}')">🔊</button></td></tr>`).join("")}</table></div>
+ <div class="row"><button onclick="showEn=!showEn;render()">${showEn?"Hide":"Show"} meanings</button><button class="pri" onclick="startVQ()">Quiz me (5)</button></div>${P.vb[VC]!==undefined?`<p class="mut c">Best score: ${P.vb[VC]}/5</p>`:""}`}
+
+document.addEventListener("keydown",e=>{
+ if(e.ctrlKey||e.metaKey||e.altKey||(T!=="quiz"&&T!=="vq"))return;
+ const n=$("#next");
+ if(e.key==="Enter"){if(n){e.preventDefault();n.click()}else if(document.activeElement&&document.activeElement.id==="inp"){e.preventDefault();ansT()}return}
+ if(/^[1-4]$/.test(e.key)&&!(document.activeElement&&document.activeElement.id==="inp")){const b=document.querySelector(`.opt[data-i="${+e.key-1}"]`);if(b&&!b.disabled)b.click()}});
+render();
+</script></body></html>
